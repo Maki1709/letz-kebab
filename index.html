@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Lët'z Kebab – Entdecke deinen Food-Spot in Hobscheid, Luxemburg.">
+<title>Lët'z Kebab | Official Website</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#090909;
+--panel:#141414;
+--red:#f04432;
+--white:#ffffff;
+--muted:#aaa;
+--border:rgba(255,255,255,.12);
+--max:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+body.loading{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img,video{display:block;width:100%;object-fit:cover}
+button{font:inherit}
+.container{width:min(90%,var(--max));margin:auto}
+h1,h2,h3,.display{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase}
+h2{font-size:clamp(3rem,7vw,6rem);line-height:.95}
+.red{color:var(--red)}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--red);font-size:.72rem;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+.eyebrow:before{content:"";width:28px;height:2px;background:var(--red)}
+.section{padding:110px 0}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:48px}
+.section-heading p{max-width:390px;color:var(--muted);line-height:1.9;font-size:.9rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:55px;padding:0 25px;background:var(--red);border:1px solid var(--red);color:white;font-size:.75rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;transition:.3s;cursor:pointer}
+.btn:hover{background:#bd281b;border-color:#bd281b;transform:translateY(-4px)}
+.btn-outline{background:transparent;border-color:rgba(255,255,255,.4)}
+.btn-outline:hover{background:white;color:#111;border-color:white}
+.arrow{font-size:1.2rem;transition:transform .3s}
+.btn:hover .arrow{transform:translateX(5px)}
+
+/* LOADER */
+.loader{position:fixed;inset:0;z-index:9999;background:#080808;display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+.loader-title{font:clamp(2.5rem,8vw,5rem) Anton,sans-serif}
+.loader-title span{color:var(--red)}
+.loader-bar{width:180px;height:3px;background:#292929;margin:20px auto;overflow:hidden}
+.loader-bar:after{content:"";display:block;width:50%;height:100%;background:var(--red);animation:loading 1s infinite alternate}
+@keyframes loading{from{transform:translateX(-100%)}to{transform:translateX(200%)}}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:1px solid transparent;transition:.35s}
+header.scrolled{background:rgba(8,8,8,.94);backdrop-filter:blur(18px);border-color:var(--border)}
+.nav{height:84px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.brand{display:flex;align-items:center;gap:12px;font:1.55rem Anton,sans-serif}
+.brand-icon{width:45px;height:45px;display:grid;place-items:center;background:var(--red);font-size:1.6rem;transform:skew(-4deg)}
+.brand small{display:block;font:700 .58rem Inter,sans-serif;color:var(--muted);letter-spacing:2px;margin-top:4px}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links>a:not(.btn){font-size:.76rem;font-weight:800;color:#ddd;transition:color .25s}
+.nav-links>a:not(.btn):hover{color:var(--red)}
+.menu-toggle{display:none;background:none;border:1px solid var(--border);color:white;width:45px;height:45px;font-size:1.4rem;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:#151515;isolation:isolate}
+.hero-video{position:absolute;inset:0;height:100%;z-index:-3;object-fit:cover}
+.hero-fallback{position:absolute;inset:0;z-index:-4;background:url('https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1800&q=85') center/cover}
+.hero-overlay{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.64) 55%,rgba(0,0,0,.15)),linear-gradient(0deg,var(--bg),transparent 30%)}
+.hero-content{padding-top:125px;padding-bottom:105px;max-width:850px}
+.hero-kicker{display:flex;align-items:center;gap:11px;font-size:.75rem;font-weight:900;letter-spacing:2px;margin-bottom:25px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 15px var(--red)}
+.hero h1{font-size:clamp(5rem,13vw,11rem);line-height:.8;letter-spacing:-2px;margin-bottom:32px}
+.hero h1 .outline{-webkit-text-stroke:1.5px white;color:transparent}
+.hero h1 .red{color:var(--red)}
+.hero-copy{max-width:470px;color:#ddd;line-height:1.9;font-size:.95rem;margin-bottom:30px}
+.hero-buttons{display:flex;gap:13px;flex-wrap:wrap}
+.hero-bottom{position:absolute;bottom:30px;left:5%;right:5%;display:flex;align-items:center;justify-content:space-between}
+.scroll-cue{display:flex;align-items:center;gap:12px;color:#bbb;font-size:.7rem;letter-spacing:2px;text-transform:uppercase}
+.scroll-cue i{display:block;width:45px;height:1px;background:var(--red)}
+.hero-number{font:1.3rem Anton,sans-serif}
+.hero-number span{color:var(--red)}
+.hero-content>*{animation:heroEnter .8s both}
+.hero-content>*:nth-child(1){animation-delay:.1s}
+.hero-content>*:nth-child(2){animation-delay:.25s}
+.hero-content>*:nth-child(3){animation-delay:.4s}
+.hero-content>*:nth-child(4){animation-delay:.55s}
+@keyframes heroEnter{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+/* TICKER */
+.ticker{overflow:hidden;background:var(--red);padding:17px 0;transform:rotate(-1deg) scale(1.02)}
+.ticker-track{display:flex;width:max-content;animation:moveTicker 30s linear infinite}
+.ticker-item{padding:0 24px;display:flex;align-items:center;gap:25px;font:1.35rem Anton,sans-serif;letter-spacing:1px;white-space:nowrap}
+.ticker-item span{color:#111}
+@keyframes moveTicker{to{transform:translateX(-50%)}}
+
+/* STORY */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.story-visual{position:relative;min-height:570px}
+.story-photo{position:absolute;inset:0 55px 45px 0;overflow:hidden;border-radius:8px;background:#222}
+.story-photo img{height:100%;transition:transform .8s}
+.story-photo:hover img{transform:scale(1.06)}
+.story-stamp{position:absolute;right:0;bottom:0;width:165px;height:165px;border-radius:50%;background:var(--red);border:8px solid var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(7deg)}
+.story-stamp strong{font:2.5rem Anton,sans-serif}
+.story-stamp span{font-size:.65rem;line-height:1.5;font-weight:900;letter-spacing:1px}
+.story-copy h2{margin:22px 0}
+.story-copy>p{color:var(--muted);line-height:1.95;font-size:.9rem;margin-bottom:18px}
+.story-points{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:30px 0}
+.point{padding-top:17px;border-top:1px solid var(--border)}
+.point strong{font-size:.8rem;display:block;margin-bottom:9px}
+.point p{color:var(--muted);font-size:.76rem;line-height:1.8}
+
+/* MENU */
+.menu-section{background:#111;position:relative}
+.menu-section:before{content:"MENU";position:absolute;top:30px;right:-20px;font:clamp(8rem,20vw,18rem) Anton,sans-serif;color:rgba(255,255,255,.025);pointer-events:none}
+.menu-filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:35px}
+.filter-btn{padding:12px 20px;background:transparent;border:1px solid var(--border);color:#ddd;font-size:.72rem;font-weight:900;text-transform:uppercase;cursor:pointer;transition:.3s}
+.filter-btn:hover,.filter-btn.active{background:var(--red);border-color:var(--red);color:white}
+.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.menu-card{background:#191919;border:1px solid rgba(255,255,255,.06);overflow:hidden;border-radius:8px;transition:transform .35s,border-color .35s}
+.menu-card:hover{transform:translateY(-8px);border-color:rgba(240,68,50,.7)}
+.menu-card.hidden{display:none}
+.menu-image{height:235px;position:relative;overflow:hidden;background:#242424}
+.menu-image img{height:100%;transition:transform .7s}
+.menu-card:hover .menu-image img{transform:scale(1.08)}
+.menu-tag{position:absolute;top:14px;left:14px;background:var(--red);padding:8px 11px;font-size:.62rem;font-weight:900;letter-spacing:1px}
+.menu-content{padding:23px}
+.menu-content h3{font-size:1.8rem;margin-bottom:10px}
+.menu-content p{font-size:.8rem;color:var(--muted);line-height:1.8;min-height:48px}
+.menu-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.menu-bottom span{font-size:.65rem;font-weight:900;letter-spacing:.5px}
+.menu-bottom b{font-size:.7rem;color:var(--red)}
+.menu-disclaimer{font-size:.75rem;color:#888;line-height:1.8;margin-top:25px}
+
+/* BIG IMAGE BANNER */
+.banner{position:relative;min-height:450px;display:flex;align-items:center;overflow:hidden}
+.banner>img{position:absolute;inset:0;height:100%;z-index:-2}
+.banner:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(0,0,0,.93),rgba(0,0,0,.3))}
+.banner-content{padding:85px 0;max-width:650px}
+.banner-content h2{margin:22px 0}
+.banner-content p{color:#ddd;line-height:1.9;max-width:470px;margin-bottom:28px}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-template-rows:230px 230px;gap:15px}
+.gallery-item{position:relative;overflow:hidden;border-radius:8px;background:#222}
+.gallery-item:first-child{grid-row:span 2}
+.gallery-item img{height:100%;transition:transform .8s,filter .4s;filter:brightness(.8)}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(1)}
+.gallery-item:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.gallery-label{position:absolute;bottom:18px;left:18px;z-index:2;font:1.4rem Anton,sans-serif;text-transform:uppercase}
+
+/* LOCATION */
+.location-section{background:#111}
+.location-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px}
+.location-card{padding:35px;background:#191919;border:1px solid var(--border);border-radius:8px}
+.location-card h2{margin:22px 0;font-size:clamp(3rem,5vw,4.5rem)}
+.location-card>p{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:25px}
+.location-row{display:flex;gap:15px;padding:18px 0;border-top:1px solid var(--border)}
+.location-icon{flex:0 0 42px;height:42px;display:grid;place-items:center;background:rgba(240,68,50,.13);color:var(--red);font-size:1.2rem}
+.location-row strong{display:block;font-size:.8rem;margin:3px 0 7px}
+.location-row span{font-size:.76rem;line-height:1.8;color:var(--muted)}
+.map{min-height:480px;overflow:hidden;border:1px solid var(--border);border-radius:8px}
+.map iframe{width:100%;height:100%;min-height:480px;border:0;filter:grayscale(1) invert(.9) contrast(.85)}
+
+/* CTA */
+.final-cta{padding:110px 0;text-align:center;position:relative;overflow:hidden}
+.final-cta:before{content:"LET'S EAT";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:clamp(6rem,17vw,16rem) Anton,sans-serif;color:rgba(255,255,255,.025);white-space:nowrap}
+.final-cta .container{position:relative}
+.final-cta h2{margin:25px 0}
+.final-cta p{max-width:520px;margin:0 auto 30px;color:var(--muted);font-size:.9rem;line-height:1.9}
+
+/* FOOTER */
+footer{background:#050505;border-top:1px solid var(--border);padding:45px 0 25px}
+.footer-top{display:flex;justify-content:space-between;align-items:center;gap:30px;padding-bottom:35px}
+.footer-brand p{font-size:.76rem;color:var(--muted);margin-top:12px}
+.footer-links{display:flex;flex-wrap:wrap;gap:22px}
+.footer-links a{font-size:.75rem;color:#bbb;transition:color .25s}
+.footer-links a:hover{color:var(--red)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:23px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;color:#777;font-size:.7rem}
+.back-top{position:fixed;right:22px;bottom:22px;z-index:800;width:45px;height:45px;border:0;background:var(--red);color:white;font-size:1.3rem;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:.3s}
+.back-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.back-top:hover{background:#b92518}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.reveal.show{opacity:1;transform:translateY(0)}
+.delay-1{transition-delay:.12s}
+.delay-2{transition-delay:.24s}
+
+/* TABLET */
+@media(max-width:950px){
+.nav-links{gap:17px}
+.nav-links>a:not(.btn){font-size:.68rem}
+.story-grid{gap:38px}
+.story-visual{min-height:460px}
+.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.location-grid{grid-template-columns:1fr}
+.map,.map iframe{min-height:400px}
+}
+
+/* MOBILE */
+@media(max-width:700px){
+.section{padding:78px 0}
+.nav{height:72px}
+.menu-toggle{display:block}
+.nav-links{position:absolute;top:72px;left:0;right:0;background:#080808;padding:20px 5%;display:flex;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--border);opacity:0;visibility:hidden;transform:translateY(-10px);transition:.3s}
+.nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-links>a:not(.btn){padding:17px 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.nav-links .btn{margin-top:18px}
+.hero{min-height:95svh}
+.hero-content{padding-top:125px}
+.hero h1{font-size:clamp(4.5rem,16vw,7rem)}
+.hero-copy{font-size:.88rem}
+.section-heading{display:block}
+.section-heading p{margin-top:20px}
+.story-grid{grid-template-columns:1fr;gap:42px}
+.story-visual{min-height:430px}
+.story-copy h2{font-size:3.8rem}
+.menu-grid{grid-template-columns:1fr}
+.menu-image{height:260px}
+.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px;gap:10px}
+.gallery-item:first-child{grid-row:auto;grid-column:span 2}
+.location-card{padding:25px}
+.map,.map iframe{min-height:330px}
+.footer-top{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:420px){
+.hero h1{font-size:3.8rem}
+.hero-buttons .btn{width:100%}
+.story-visual{min-height:350px}
+.story-stamp{width:130px;height:130px;border-width:5px}
+.story-stamp strong{font-size:2rem}
+.story-points{grid-template-columns:1fr}
+.gallery-grid{grid-template-rows:180px 140px 140px}
+.filter-btn{padding:10px 13px;font-size:.65rem}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body class="loading">
+
+<div class="loader" id="loader">
+  <div>
+    <div class="loader-title">LËT'Z <span>KEBAB</span></div>
+    <div class="loader-bar"></div>
+    <p style="text-align:center;color:#777;font-size:.7rem;letter-spacing:3px">GOOD FOOD IS LOADING</p>
+  </div>
+</div>
+
+<header id="header">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <span class="brand-icon">L</span>
+      <span>LËT'Z KEBAB<small>HOBSCHIED · LUXEMBOURG</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Navigation öffnen" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#story">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+      <a class="btn" href="#location">Find Us <span class="arrow">↗</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-fallback"></div>
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1800&q=85">
+    <source src="https://videos.pexels.com/video-files/4253298/4253298-hd_1920_1080_25fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-kicker"><span class="dot"></span> GOOD FOOD. GOOD MOOD.</div>
+      <h1>REAL<br><span class="outline">TASTE.</span><br><span class="red">REAL</span><br>HUNGER.</h1>
+      <p class="hero-copy">Big flavour. Fresh vibes. Your next favourite bite. Discover Lët'z Kebab in Hobscheid and make every craving count.</p>
+      <div class="hero-buttons">
+        <a class="btn" href="#menu">Explore the Menu <span class="arrow">↗</span></a>
+        <a class="btn btn-outline" href="#location">Find Our Location</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div class="scroll-cue"><i></i> SCROLL TO DISCOVER</div>
+    <div class="hero-number"><span>01</span> / 04</div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item">FRESH FLAVOUR <span>✳</span> BIG CRAVINGS <span>✳</span> GOOD FOOD <span>✳</span> LET'S EAT <span>✳</span></div>
+    <div class="ticker-item">FRESH FLAVOUR <span>✳</span> BIG CRAVINGS <span>✳</span> GOOD FOOD <span>✳</span> LET'S EAT <span>✳</span></div>
+    <div class="ticker-item">FRESH FLAVOUR <span>✳</span> BIG CRAVINGS <span>✳</span> GOOD FOOD <span>✳</span> LET'S EAT <span>✳</span></div>
+  </div>
+</div>
+
+<section class="section" id="story">
+  <div class="container story-grid">
+    <div class="story-visual reveal">
+      <div class="story-photo">
+        <img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1000&q=85" alt="Kebab Food-Inspiration" loading="lazy">
+      </div>
+      <div class="story-stamp"><strong>GOOD</strong><span>FOOD<br>GOOD MOOD</span></div>
+    </div>
+    <div class="story-copy reveal delay-1">
+      <span class="eyebrow">More than a quick bite</span>
+      <h2>MADE FOR<br><span class="red">YOUR CRAVINGS.</span></h2>
+      <p>Sometimes you just need a meal that hits the spot. Something satisfying, something familiar, something worth coming back for.</p>
+      <p>Lët'z Kebab is a local food spot in Hobscheid, Luxembourg. Stop by, explore the available options and make your next food break count.</p>
+      <div class="story-points">
+        <div class="point"><strong>01 / BIG FLAVOUR</strong><p>Discover a range of fast-food favourites.</p></div>
+        <div class="point"><strong>02 / YOUR MOMENT</strong><p>For lunch breaks and evening cravings.</p></div>
+        <div class="point"><strong>03 / LOCAL SPOT</strong><p>Your food stop in Hobscheid.</p></div>
+        <div class="point"><strong>04 / COME THROUGH</strong><p>Find the location and plan your visit.</p></div>
+      </div>
+      <a class="btn" href="#location">Visit Lët'z Kebab <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section menu-section" id="menu">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><span class="eyebrow">Find your favourite</span><h2 style="margin-top:20px">THE <span class="red">MENU.</span></h2></div>
+      <p>From kebab-inspired classics to tasty sides, browse the categories and explore the options shown here.</p>
+    </div>
+
+    <div class="menu-filters reveal">
+      <button class="filter-btn active" data-filter="all">All Items</button>
+      <button class="filter-btn" data-filter="kebab">Kebab</button>
+      <button class="filter-btn" data-filter="tacos">Tacos</button>
+      <button class="filter-btn" data-filter="pizza">Pizza</button>
+      <button class="filter-btn" data-filter="sides">Sides</button>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-card reveal" data-category="kebab">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80" alt="Kebab-Beispielbild" loading="lazy"><span class="menu-tag">KEBAB</span></div>
+        <div class="menu-content"><h3>The Classic</h3><p>A classic kebab-inspired favourite for a satisfying meal.</p><div class="menu-bottom"><span>CLASSIC FAVOURITE</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+      <article class="menu-card reveal delay-1" data-category="kebab">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1561651823-34feb02250e4?auto=format&fit=crop&w=800&q=80" alt="Wrap-Beispielbild" loading="lazy"><span class="menu-tag">WRAP</span></div>
+        <div class="menu-content"><h3>The Wrap</h3><p>A wrap-inspired option for a quick bite on the go.</p><div class="menu-bottom"><span>WRAP IT UP</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+      <article class="menu-card reveal delay-2" data-category="tacos">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=800&q=80" alt="Taco-Beispielbild" loading="lazy"><span class="menu-tag">TACOS</span></div>
+        <div class="menu-content"><h3>Loaded Tacos</h3><p>A taco-inspired choice for a different kind of craving.</p><div class="menu-bottom"><span>FULL OF FLAVOUR</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+      <article class="menu-card reveal" data-category="pizza">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza-Beispielbild" loading="lazy"><span class="menu-tag">PIZZA</span></div>
+        <div class="menu-content"><h3>Pizza Time</h3><p>A pizza-inspired pick for when you're craving a slice.</p><div class="menu-bottom"><span>SLICE OF HAPPINESS</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+      <article class="menu-card reveal delay-1" data-category="sides">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" alt="Pommes-Beispielbild" loading="lazy"><span class="menu-tag">SIDES</span></div>
+        <div class="menu-content"><h3>Crispy Fries</h3><p>A familiar side to round out your food order.</p><div class="menu-bottom"><span>THE PERFECT SIDE</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+      <article class="menu-card reveal delay-2" data-category="sides">
+        <div class="menu-image"><img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=800&q=80" alt="Snack-Beispielbild" loading="lazy"><span class="menu-tag">EXTRAS</span></div>
+        <div class="menu-content"><h3>Little Extras</h3><p>Explore the available sides and extras to complete your meal.</p><div class="menu-bottom"><span>MAKE IT YOURS</span><b>ASK IN STORE ↗</b></div></div>
+      </article>
+    </div>
+    <p class="menu-disclaimer">Important: This is a design demo. The dish names, descriptions and images are illustrative and are not a verified official menu. Add the restaurant's real dishes, prices, ingredients and allergen information before publishing.</p>
+  </div>
+</section>
+
+<section class="banner">
+  <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1800&q=85" alt="Food inspiration" loading="lazy">
+  <div class="container"><div class="banner-content reveal">
+    <span class="eyebrow">Your next stop</span>
+    <h2>GOOD FOOD.<br><span class="red">NO BIG SPEECH.</span></h2>
+    <p>Bring your appetite, choose your favourite and make your next stop count. Find Lët'z Kebab in Hobscheid.</p>
+    <a class="btn" href="#location">Get Directions <span class="arrow">↗</span></a>
+  </div></div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><span class="eyebrow">A taste of the vibe</span><h2 style="margin-top:20px">THE <span class="red">GALLERY.</span></h2></div>
+      <p>Food, flavour and a little inspiration for your next visit. Replace the sample photos with real photos of the restaurant.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1000&q=85" alt="Kebab inspiration" loading="lazy"><span class="gallery-label">The Classics</span></div>
+      <div class="gallery-item reveal delay-1"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza inspiration" loading="lazy"><span class="gallery-label">Pizza Time</span></div>
+      <div class="gallery-item reveal delay-2"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" alt="Fries inspiration" loading="lazy"><span class="gallery-label">The Sides</span></div>
+      <div class="gallery-item reveal delay-1"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=800&q=80" alt="Taco inspiration" loading="lazy"><span class="gallery-label">Big Flavour</span></div>
+      <div class="gallery-item reveal delay-2"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Food inspiration" loading="lazy"><span class="gallery-label">Good Times</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section location-section" id="location">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><span class="eyebrow">Come find us</span><h2 style="margin-top:20px">YOUR NEXT<br><span class="red">FOOD STOP.</span></h2></div>
+      <p>Planning a visit? Use the address below to locate Lët'z Kebab in Hobscheid, Luxembourg.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-card reveal">
+        <span class="eyebrow">Visit the spot</span>
+        <h2>LET'S<br><span class="red">MEET.</span></h2>
+        <p>Find the location, plan your route and check the current opening hours before you visit.</p>
+        <div class="location-row"><div class="location-icon">⌖</div><div><strong>OUR ADDRESS</strong><span>25 Grand-Rue<br>8372 Hobscheid, Luxembourg</span></div></div>
+        <div class="location-row"><div class="location-icon">◷</div><div><strong>OPENING HOURS</strong><span>Opening hours have not been verified on this demo page. Check directly with the restaurant.</span></div></div>
+        <div class="location-row"><div class="location-icon">↗</div><div><strong>GET DIRECTIONS</strong><span>Open Google Maps to plan your route.</span></div></div>
+        <a class="btn" style="width:100%;margin-top:25px" href="https://www.google.com/maps/search/?api=1&query=25+Grand-Rue%2C+8372+Hobscheid%2C+Luxembourg" target="_blank" rel="noopener noreferrer">Open Google Maps <span class="arrow">↗</span></a>
+      </div>
+      <div class="map reveal delay-1">
+        <iframe title="Map to Lët'z Kebab" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=25%20Grand-Rue%2C%208372%20Hobscheid%2C%20Luxembourg&z=15&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="container reveal">
+    <span class="eyebrow">You know where to find us</span>
+    <h2>CRAVING<br><span class="red">SOMETHING GOOD?</span></h2>
+    <p>Make Lët'z Kebab your next stop. Find us in Hobscheid and discover the options available when you visit.</p>
+    <a class="btn" href="https://www.google.com/maps/search/?api=1&query=25+Grand-Rue%2C+8372+Hobscheid%2C+Luxembourg" target="_blank" rel="noopener noreferrer">Let's Get There <span class="arrow">↗</span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="#home"><span class="brand-icon">L</span><span>LËT'Z KEBAB<small>HOBSCHIED · LUXEMBOURG</small></span></a>
+        <p>Good food. Good mood. Your local food stop.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a><a href="#story">About</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#location">Location</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Lët'z Kebab. All rights reserved.</span>
+      <span>Made for good taste.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+/* Wait until the page has loaded before hiding the intro screen. */
+window.addEventListener("load",function(){
+  window.setTimeout(function(){
+    document.getElementById("loader").classList.add("done");
+    document.body.classList.remove("loading");
+  },450);
+});
+
+/* Header background and back-to-top button. */
+const header=document.getElementById("header");
+const backTop=document.getElementById("backTop");
+
+function handleScroll(){
+  header.classList.toggle("scrolled",window.scrollY>40);
+  backTop.classList.toggle("visible",window.scrollY>450);
+}
+window.addEventListener("scroll",handleScroll,{passive:true});
+handleScroll();
+
+backTop.addEventListener("click",function(){
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+/* Responsive mobile navigation. */
+const menuToggle=document.getElementById("menuToggle");
+const navLinks=document.getElementById("navLinks");
+
+menuToggle.addEventListener("click",function(){
+  const opened=navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded",String(opened));
+  menuToggle.textContent=opened?"✕":"☰";
+});
+
+navLinks.querySelectorAll("a").forEach(function(link){
+  link.addEventListener("click",function(){
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded","false");
+    menuToggle.textContent="☰";
+  });
+});
+
+/* Animate elements when they enter the viewport. */
+const revealItems=document.querySelectorAll(".reveal");
+
+if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(function(entries,obs){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.12,rootMargin:"0px 0px -25px 0px"});
+
+  revealItems.forEach(function(item){
+    observer.observe(item);
+  });
+}else{
+  revealItems.forEach(function(item){
+    item.classList.add("show");
+  });
+}
+
+/* Filter menu cards by category. */
+const filterButtons=document.querySelectorAll(".filter-btn");
+const menuCards=document.querySelectorAll(".menu-card");
+
+filterButtons.forEach(function(button){
+  button.addEventListener("click",function(){
+    const selected=button.dataset.filter;
+
+    filterButtons.forEach(function(other){
+      other.classList.remove("active");
+    });
+    button.classList.add("active");
+
+    menuCards.forEach(function(card){
+      const matches=selected==="all"||card.dataset.category===selected;
+      card.classList.toggle("hidden",!matches);
+    });
+  });
+});
+
+/* Display the current year automatically. */
+document.getElementById("year").textContent=new Date().getFullYear();
+
+/* Keep the video optional: the image background remains visible if it fails. */
+const heroVideo=document.querySelector(".hero-video");
+
+if(heroVideo){
+  heroVideo.addEventListener("error",function(){
+    heroVideo.style.display="none";
+  });
+}
+</script>
+
+</body>
+</html>
